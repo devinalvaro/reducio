@@ -8,8 +8,7 @@ class CorpusReader:
     document_frequency = {}
 
     def __init__(self, corpustype):
-        if corpustype.lower() == 'news':
-            self.filepath = 'data/news.csv'
+        self.filepath = 'data/news.csv'
 
         self.open_corpus()
         self.count_words()
