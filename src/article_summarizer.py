@@ -1,6 +1,6 @@
 from operator import itemgetter
 
-from tfidf import term_frequency as tf, inverse_document_frequency as idf
+from tf_idf import term_frequency as tf, inverse_document_frequency as idf
 from tokenizer import tokenize_word, tokenize_sentence
 
 
@@ -46,6 +46,7 @@ class ArticleSummarizer:
         total = 0
         for word in words:
             total += self.word_score(word)
+
         return total / len(words)
 
     def word_score(self, word):

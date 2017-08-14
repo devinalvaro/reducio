@@ -1,4 +1,4 @@
-import csv
+from csv import DictReader
 
 from tokenizer import tokenize_word
 
@@ -15,7 +15,7 @@ class CorpusReader:
 
     def open_corpus(self):
         with open(self.filepath, newline='', encoding='iso-8859-1') as csvfile:
-            reader = csv.DictReader(csvfile)
+            reader = DictReader(csvfile)
             for entry in reader:
                 self.articles.append(entry['ctext'])
 

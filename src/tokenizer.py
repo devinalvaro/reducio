@@ -1,4 +1,4 @@
-import re
+from re import compile
 
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize, sent_tokenize
@@ -9,7 +9,7 @@ def tokenize_word(text):
     text = text.lower()
 
     # filter punctuation
-    pattern = re.compile('[^A-Za-z -]+')
+    pattern = compile('[^A-Za-z -]+')
     text = pattern.sub('', text)
 
     # tokenize text into words

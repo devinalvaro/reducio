@@ -1,5 +1,7 @@
-from articlesummarizer import ArticleSummarizer
-from corpusreader import CorpusReader
+from article_summarizer import ArticleSummarizer
+from corpus_reader import CorpusReader
+
+print("Please wait for the dataset to be processed...")
 
 corpus_reader = CorpusReader()
 
