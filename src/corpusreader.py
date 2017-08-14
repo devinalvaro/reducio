@@ -5,11 +5,11 @@ from tokenizer import tokenize_word
 
 class CorpusReader:
     articles = []
-    words = {}
+    document_frequency = {}
 
     def __init__(self, corpustype):
-        if corpustype == 'news':
-            self.filepath = '../data/news.csv'
+        if corpustype.lower() == 'news':
+            self.filepath = 'data/news.csv'
 
         self.open_corpus()
         self.count_words()
@@ -22,10 +22,10 @@ class CorpusReader:
 
     def count_words(self):
         for article in self.articles:
-            word_tokens = set(tokenize_word(article))
+            words = set(tokenize_word(article))
 
-            for word in word_tokens:
-                if word not in self.words:
-                    self.words[word] = 1
+            for word in words:
+                if word not in self.document_frequency:
+                    self.document_frequency[word] = 1
                 else:
-                    self.words[word] += 1
+                    self.document_frequency[word] += 1
