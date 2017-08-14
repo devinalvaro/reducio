@@ -1,7 +1,7 @@
 import re
 
 from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
+from nltk.tokenize import word_tokenize, sent_tokenize
 
 
 def tokenize_word(text):
@@ -20,3 +20,10 @@ def tokenize_word(text):
     word_tokens = [word for word in word_tokens if word not in stop_words]
 
     return word_tokens
+
+
+def tokenize_sentence(text):
+    # tokenize text into sentences
+    sentence_tokens = sent_tokenize(text)
+
+    return sentence_tokens
