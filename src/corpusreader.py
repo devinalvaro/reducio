@@ -7,11 +7,11 @@ class CorpusReader:
     articles = []
     document_frequency = {}
 
-    def __init__(self, corpustype):
+    def __init__(self):
         self.filepath = 'data/news.csv'
 
         self.open_corpus()
-        self.count_words()
+        self.count_document_frequency()
 
     def open_corpus(self):
         with open(self.filepath, newline='', encoding='iso-8859-1') as csvfile:
@@ -19,7 +19,7 @@ class CorpusReader:
             for entry in reader:
                 self.articles.append(entry['ctext'])
 
-    def count_words(self):
+    def count_document_frequency(self):
         for article in self.articles:
             words = set(tokenize_word(article))
 
