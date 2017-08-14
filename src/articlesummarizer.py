@@ -8,7 +8,7 @@ class ArticleSummarizer:
 
     def __init__(self, article, document_number, document_frequency):
         self.article = article
-        self.document_number = document_number
+        self.document_number = document_number + 1
         self.document_frequency = document_frequency
 
         words = tokenize_word(self.article)
@@ -18,12 +18,22 @@ class ArticleSummarizer:
             else:
                 self.word_frequency[word] += 1
 
+        words = set(words)
+        for word in words:
+            if word not in self.document_frequency:
+                self.document_frequency[word] = 1
+            else:
+                self.document_frequency[word] += 1
+
         self.sentences = tokenize_sentence(self.article)
         for sentence in self.sentences:
             self.sentence_scores.append(self.sentence_score(sentence))
 
     def sentence_score(self, sentence):
         words = tokenize_word(sentence)
+
+        if not words:
+            return 0
 
         total = 0
         for word in words:
