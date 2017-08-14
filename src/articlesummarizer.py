@@ -1,3 +1,5 @@
+from operator import itemgetter
+
 from tfidf import term_frequency as tf, inverse_document_frequency as idf
 from tokenizer import tokenize_word, tokenize_sentence
 
@@ -27,7 +29,13 @@ class ArticleSummarizer:
 
         self.sentences = tokenize_sentence(self.article)
         for sentence in self.sentences:
-            self.sentence_scores.append(self.sentence_score(sentence))
+            self.sentence_scores.append((self.sentence_score(sentence),
+                                         sentence))
+
+        self.sentence_scores = sorted(
+            self.sentence_scores, key=itemgetter(0), reverse=True)
+
+        self.top_sentences = [sentence[1] for sentence in self.sentence_scores]
 
     def sentence_score(self, sentence):
         words = tokenize_word(sentence)
@@ -38,9 +46,18 @@ class ArticleSummarizer:
         total = 0
         for word in words:
             total += self.word_score(word)
-
         return total / len(words)
 
     def word_score(self, word):
         return tf(word, self.word_frequency) * idf(word, self.document_number,
                                                    self.document_frequency)
+
+    def get_top_sentences(self, percentage):
+        n = int(percentage / 100 * len(self.sentences))
+
+        top_n_sentences = [
+            sentence for sentence in self.sentences
+            if sentence in self.top_sentences[0:n]
+        ]
+
+        return top_n_sentences
