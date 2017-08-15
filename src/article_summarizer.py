@@ -81,7 +81,7 @@ class ArticleSummarizer:
         # return a word's tf-idf score
 
         return tf(word, self.__word_frequency) * idf(word, self.document_number,
-                                                   self.document_frequency)
+                                                     self.document_frequency)
 
     def __weigh_sentences_by_position(self):
         # weigh each sentence relative to its position.
