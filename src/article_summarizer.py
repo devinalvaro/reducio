@@ -10,8 +10,8 @@ class ArticleSummarizer:
     Rank sentences in the article with tf-idf scoring algorithm.
     """
 
-    sentence_scores = []
-    word_frequency = {}
+    __sentence_scores = []
+    __word_frequency = {}
 
     def __init__(self, article, document_number, document_frequency):
         """ Inits ArticleSummarizer
@@ -38,10 +38,10 @@ class ArticleSummarizer:
         for sentence in self.sentences:
             words = tokenize_word(sentence, only_noun=True)
             for word in words:
-                if word not in self.word_frequency:
-                    self.word_frequency[word] = 1
+                if word not in self.__word_frequency:
+                    self.__word_frequency[word] = 1
                 else:
-                    self.word_frequency[word] += 1
+                    self.__word_frequency[word] += 1
 
                 word_set.add(word)
 
@@ -52,30 +52,19 @@ class ArticleSummarizer:
                 self.document_frequency[word] += 1
 
         for sentence in self.sentences:
-            self.sentence_scores.append(
-                [self.sentence_score(sentence), sentence])
+            self.__sentence_scores.append(
+                [self.__sentence_score(sentence), sentence])
 
-        self.weigh_sentences_by_position()
+        self.__weigh_sentences_by_position()
 
-        self.sentence_scores = sorted(
-            self.sentence_scores, key=itemgetter(0), reverse=True)
+        self.__sentence_scores = sorted(
+            self.__sentence_scores, key=itemgetter(0), reverse=True)
         self.ranked_sentences = [
-            sentence[1] for sentence in self.sentence_scores
+            sentence[1] for sentence in self.__sentence_scores
         ]
 
-    def sentence_score(self, sentence):
-        """Score a sentence with tf-idf.
-
-        Tokenize the sentence into words.
-        Sum the word scores.
-        Return the average.
-
-        Args:
-            sentence: sentence to be scored.
-
-        Returns:
-            The average score of words in the sentence.
-        """
+    def __sentence_score(self, sentence):
+        # return a sentence's average tf-idf score
 
         words = tokenize_word(sentence, only_noun=True)
 
@@ -84,32 +73,24 @@ class ArticleSummarizer:
 
         total = 0
         for word in words:
-            total += self.word_score(word)
+            total += self.__word_score(word)
 
         return total / len(words)
 
-    def word_score(self, word):
-        """Score a word with tf-idf.
+    def __word_score(self, word):
+        # return a word's tf-idf score
 
-        Args:
-            word: word to be scored.
-
-        Returns:
-            The word's tf-idf score.
-        """
-
-        return tf(word, self.word_frequency) * idf(word, self.document_number,
+        return tf(word, self.__word_frequency) * idf(word, self.document_number,
                                                    self.document_frequency)
 
-    def weigh_sentences_by_position(self):
-        """Weigh each sentence relative to its position.
+    def __weigh_sentences_by_position(self):
+        # weigh each sentence relative to its position.
 
-        Weight values are taken from a paper by Yohei Seki
-        http://research.nii.ac.jp/ntcir/workshop/OnlineProceedings3/NTCIR3-TSC-SekiY.pdf
-        """
+        # weight values are taken from a paper by Yohei Seki
+        # http://research.nii.ac.jp/ntcir/workshop/OnlineProceedings3/NTCIR3-TSC-SekiY.pdf
 
-        for index, sentence_score in enumerate(self.sentence_scores):
-            distribution = index / len(self.sentence_scores)
+        for index, __sentence_score in enumerate(self.__sentence_scores):
+            distribution = index / len(self.__sentence_scores)
 
             if 0 <= distribution and distribution < 0.1:
                 weight = 0.17
@@ -132,7 +113,7 @@ class ArticleSummarizer:
             else:
                 weight = 0.15
 
-            sentence_score[0] *= weight
+            __sentence_score[0] *= weight
 
     def get_top_sentences(self, percentage):
         """Return top n% of the ranked sentences
