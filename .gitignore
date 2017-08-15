@@ -103,5 +103,6 @@ ENV/
 # pickle
 *.p
 
-# article
+# data
 data/article.txt
+data/*.csv
