@@ -21,7 +21,7 @@ def tokenize_word(text, only_noun):
 
     text = text.lower()
 
-    pattern = re.compile(r'[^\w\s]')
+    pattern = re.compile(r'[^a-zA-Z\s]')
     text = pattern.sub(' ', text)
 
     word_tokens = word_tokenize(text)
