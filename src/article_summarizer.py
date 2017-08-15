@@ -5,10 +5,30 @@ from tokenizer import tokenize_word, tokenize_sentence
 
 
 class ArticleSummarizer:
+    """Summarize an article
+
+    Rank sentences in the article with tf-idf scoring algorithm.
+    """
+
     sentence_scores = []
     word_frequency = {}
 
     def __init__(self, article, document_number, document_frequency):
+        """ Inits ArticleSummarizer
+
+        Tokenize the article into sentences and words.
+        Count term frequency and document frequency of each word.
+        Score each sentence with tf-idf.
+        Weigh each sentence relative to its position.
+        Rank the sentences by the score in decreasing order.
+
+        Args:
+            article: A string of article text.
+            document_number: Number of documents in dataset.
+            document_frequency: Frequency of a word in documents dataset, i.e.
+                 if a document has word, document_frequency[word] increase by 1.
+        """
+
         self.sentences = tokenize_sentence(article)
         self.document_number = document_number + 1
         self.document_frequency = document_frequency
@@ -44,6 +64,19 @@ class ArticleSummarizer:
         ]
 
     def sentence_score(self, sentence):
+        """Score a sentence with tf-idf.
+
+        Tokenize the sentence into words.
+        Sum the word scores.
+        Return the average.
+
+        Args:
+            sentence: sentence to be scored.
+
+        Returns:
+            The average score of words in the sentence.
+        """
+
         words = tokenize_word(sentence, only_noun=True)
 
         if not words:
@@ -56,10 +89,25 @@ class ArticleSummarizer:
         return total / len(words)
 
     def word_score(self, word):
+        """Score a word with tf-idf.
+
+        Args:
+            word: word to be scored.
+
+        Returns:
+            The word's tf-idf score.
+        """
+
         return tf(word, self.word_frequency) * idf(word, self.document_number,
                                                    self.document_frequency)
 
     def weigh_sentences_by_position(self):
+        """Weigh each sentence relative to its position.
+
+        Weight values are taken from a paper by Yohei Seki
+        http://research.nii.ac.jp/ntcir/workshop/OnlineProceedings3/NTCIR3-TSC-SekiY.pdf
+        """
+
         for index, sentence_score in enumerate(self.sentence_scores):
             distribution = index / len(self.sentence_scores)
 
@@ -87,6 +135,15 @@ class ArticleSummarizer:
             sentence_score[0] *= weight
 
     def get_top_sentences(self, percentage):
+        """Return top n% of the ranked sentences
+
+        Args:
+            percentage: A float representing the percentage, e.g. 56.8.
+
+        Returns:
+            A list of top n% sentences.
+        """
+
         n = int(percentage / 100 * len(self.sentences))
         top_n_sentences = [
             sentence for sentence in self.sentences
