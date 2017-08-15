@@ -1,10 +1,11 @@
 import re
 
 from nltk.corpus import stopwords
+from nltk.tag import pos_tag
 from nltk.tokenize import word_tokenize, sent_tokenize
 
 
-def tokenize_word(text):
+def tokenize_word(text, only_noun):
     # lowercase text
     text = text.lower()
 
@@ -18,6 +19,11 @@ def tokenize_word(text):
     # filter stop words
     stop_words = set(stopwords.words('english'))
     word_tokens = [word for word in word_tokens if word not in stop_words]
+
+    # part of speech tags
+    if only_noun:
+        word_tokens = pos_tag(word_tokens)
+        word_tokens = [word for (word, tag) in word_tokens if 'NN' in tag]
 
     return word_tokens
 

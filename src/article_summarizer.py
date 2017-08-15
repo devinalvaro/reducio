@@ -13,32 +13,35 @@ class ArticleSummarizer:
         self.document_number = document_number + 1
         self.document_frequency = document_frequency
 
-        words = tokenize_word(self.article)
-        for word in words:
-            if word not in self.word_frequency:
-                self.word_frequency[word] = 1
-            else:
-                self.word_frequency[word] += 1
+        self.sentences = tokenize_sentence(self.article)
+        word_set = set()
 
-        words = set(words)
-        for word in words:
+        for sentence in self.sentences:
+            words = tokenize_word(sentence, only_noun=True)
+            for word in words:
+                if word not in self.word_frequency:
+                    self.word_frequency[word] = 1
+                else:
+                    self.word_frequency[word] += 1
+
+                word_set.add(word)
+
+        for word in word_set:
             if word not in self.document_frequency:
                 self.document_frequency[word] = 1
             else:
                 self.document_frequency[word] += 1
 
-        self.sentences = tokenize_sentence(self.article)
         for sentence in self.sentences:
             self.sentence_scores.append((self.sentence_score(sentence),
                                          sentence))
-
         self.sentence_scores = sorted(
             self.sentence_scores, key=itemgetter(0), reverse=True)
 
         self.top_sentences = [sentence[1] for sentence in self.sentence_scores]
 
     def sentence_score(self, sentence):
-        words = tokenize_word(sentence)
+        words = tokenize_word(sentence, only_noun=True)
 
         if not words:
             return 0
@@ -55,7 +58,6 @@ class ArticleSummarizer:
 
     def get_top_sentences(self, percentage):
         n = int(percentage / 100 * len(self.sentences))
-
         top_n_sentences = [
             sentence for sentence in self.sentences
             if sentence in self.top_sentences[0:n]
