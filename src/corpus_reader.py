@@ -40,7 +40,7 @@ class CorpusReader:
 
         with open('data/news.csv') as csvfile:
             reader = read_csv(csvfile)
-            for entry in reader['ctext']:
+            for entry in reader['headline_text']:
                 self.articles.append(str(entry))
 
     def count_document_frequency(self):
