@@ -33,8 +33,11 @@ class ArticleSummarizer:
                 self.document_frequency[word] += 1
 
         for sentence in self.sentences:
-            self.sentence_scores.append((self.sentence_score(sentence),
-                                         sentence))
+            self.sentence_scores.append(
+                [self.sentence_score(sentence), sentence])
+
+        self.weigh_sentences_by_position()
+
         self.sentence_scores = sorted(
             self.sentence_scores, key=itemgetter(0), reverse=True)
 
@@ -51,6 +54,33 @@ class ArticleSummarizer:
             total += self.word_score(word)
 
         return total / len(words)
+
+    def weigh_sentences_by_position(self):
+        for index, sentence_score in enumerate(self.sentence_scores):
+            distribution = index / len(self.sentence_scores)
+
+            if 0 <= distribution and distribution < 0.1:
+                weight = 0.17
+            elif 0.1 <= distribution and distribution < 0.2:
+                weight = 0.23
+            elif 0.2 <= distribution and distribution < 0.3:
+                weight = 0.14
+            elif 0.3 <= distribution and distribution < 0.4:
+                weight = 0.08
+            elif 0.4 <= distribution and distribution < 0.5:
+                weight = 0.05
+            elif 0.5 <= distribution and distribution < 0.6:
+                weight = 0.04
+            elif 0.6 <= distribution and distribution < 0.7:
+                weight = 0.06
+            elif 0.7 <= distribution and distribution < 0.8:
+                weight = 0.04
+            elif 0.8 <= distribution and distribution < 0.9:
+                weight = 0.04
+            else:
+                weight = 0.15
+
+            sentence_score[0] *= weight
 
     def word_score(self, word):
         return tf(word, self.word_frequency) * idf(word, self.document_number,
