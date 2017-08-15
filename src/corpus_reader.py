@@ -43,13 +43,18 @@ class CorpusReader:
 
         with open('data/news.csv') as csvfile:
             reader = read_csv(csvfile)
-            for entry in reader['headline_text']:
+            for entry in reader['body']:
                 self.__articles.append(str(entry))
 
     def __count_document_frequency(self):
         # count the document frequency of each word
 
+        count = 0
         for article in self.__articles:
+            count += 1
+            if count % 1000 == 0:
+                print(count)
+
             words = set(tokenize_word(article, only_noun=False))
             for word in words:
                 if word not in self.document_frequency:
