@@ -2,7 +2,7 @@ import re
 
 from nltk.corpus import stopwords
 from nltk.tag import pos_tag
-from nltk.tokenize import word_tokenize, sent_tokenize
+from nltk.tokenize import sent_tokenize, word_tokenize
 
 
 def tokenize_word(text, only_noun):
@@ -43,6 +43,6 @@ def tokenize_sentence(text):
         text: Text to be tokenized into sentences.
     """
 
-    sentence_tokens = sent_tokenize(text)
+    sentence_tokens = sent_tokenize(text, language='english')
 
     return sentence_tokens
