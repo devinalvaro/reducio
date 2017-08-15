@@ -22,13 +22,18 @@ class CorpusReader:
 
         try:
             with open('data/news.json', 'r') as jsonfile:
-                self.document_frequency = load(jsonfile)
+                cache = load(jsonfile)
+
+                self.document_number = cache[0]
+                self.document_frequency = cache[1]
         except IOError:
             with open('data/news.json', 'w') as jsonfile:
                 self.open_corpus()
                 self.count_document_frequency()
 
-                dump(self.document_frequency, jsonfile)
+                self.document_number = len(self.articles)
+
+                dump((self.document_number, self.document_frequency), jsonfile)
 
     def open_corpus(self):
         """Open corpus dataset and store it in self.articles"""

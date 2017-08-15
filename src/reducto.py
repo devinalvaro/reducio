@@ -8,8 +8,7 @@ corpus_reader = CorpusReader()
 with open('data/article.txt', 'r') as file:
     article = file.read().replace('\n', ' ').replace('\r', '')
 
-summary = ArticleSummarizer(article,
-                            len(corpus_reader.articles),
+summary = ArticleSummarizer(article, corpus_reader.document_number,
                             corpus_reader.document_frequency)
 
 summary_percentage = float(
