@@ -9,11 +9,10 @@ class ArticleSummarizer:
     word_frequency = {}
 
     def __init__(self, article, document_number, document_frequency):
-        self.article = article
+        self.sentences = tokenize_sentence(article)
         self.document_number = document_number + 1
         self.document_frequency = document_frequency
 
-        self.sentences = tokenize_sentence(self.article)
         word_set = set()
 
         for sentence in self.sentences:
@@ -40,8 +39,9 @@ class ArticleSummarizer:
 
         self.sentence_scores = sorted(
             self.sentence_scores, key=itemgetter(0), reverse=True)
-
-        self.top_sentences = [sentence[1] for sentence in self.sentence_scores]
+        self.ranked_sentences = [
+            sentence[1] for sentence in self.sentence_scores
+        ]
 
     def sentence_score(self, sentence):
         words = tokenize_word(sentence, only_noun=True)
@@ -54,6 +54,10 @@ class ArticleSummarizer:
             total += self.word_score(word)
 
         return total / len(words)
+
+    def word_score(self, word):
+        return tf(word, self.word_frequency) * idf(word, self.document_number,
+                                                   self.document_frequency)
 
     def weigh_sentences_by_position(self):
         for index, sentence_score in enumerate(self.sentence_scores):
@@ -82,15 +86,11 @@ class ArticleSummarizer:
 
             sentence_score[0] *= weight
 
-    def word_score(self, word):
-        return tf(word, self.word_frequency) * idf(word, self.document_number,
-                                                   self.document_frequency)
-
     def get_top_sentences(self, percentage):
         n = int(percentage / 100 * len(self.sentences))
         top_n_sentences = [
             sentence for sentence in self.sentences
-            if sentence in self.top_sentences[0:n]
+            if sentence in self.ranked_sentences[0:n]
         ]
 
         return top_n_sentences
