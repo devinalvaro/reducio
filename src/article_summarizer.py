@@ -29,13 +29,13 @@ class ArticleSummarizer:
                  if a document has word, document_frequency[word] increase by 1.
         """
 
-        self.sentences = tokenize_sentence(article)
-        self.document_number = document_number + 1
-        self.document_frequency = document_frequency
+        self.__sentences = tokenize_sentence(article)
+        self.__document_number = document_number + 1
+        self.__document_frequency = document_frequency
 
         word_set = set()
 
-        for sentence in self.sentences:
+        for sentence in self.__sentences:
             words = tokenize_word(sentence, only_noun=True)
             for word in words:
                 if word not in self.__word_frequency:
@@ -46,12 +46,12 @@ class ArticleSummarizer:
                 word_set.add(word)
 
         for word in word_set:
-            if word not in self.document_frequency:
-                self.document_frequency[word] = 1
+            if word not in self.__document_frequency:
+                self.__document_frequency[word] = 1
             else:
-                self.document_frequency[word] += 1
+                self.__document_frequency[word] += 1
 
-        for sentence in self.sentences:
+        for sentence in self.__sentences:
             self.__sentence_scores.append(
                 [self.__sentence_score(sentence), sentence])
 
@@ -59,7 +59,7 @@ class ArticleSummarizer:
 
         self.__sentence_scores = sorted(
             self.__sentence_scores, key=itemgetter(0), reverse=True)
-        self.ranked_sentences = [
+        self.__ranked_sentences = [
             sentence[1] for sentence in self.__sentence_scores
         ]
 
@@ -80,8 +80,8 @@ class ArticleSummarizer:
     def __word_score(self, word):
         # return a word's tf-idf score
 
-        return tf(word, self.__word_frequency) * idf(word, self.document_number,
-                                                     self.document_frequency)
+        return tf(word, self.__word_frequency) * idf(word, self.__document_number,
+                                                     self.__document_frequency)
 
     def __weigh_sentences_by_position(self):
         # weigh each sentence relative to its position.
@@ -125,10 +125,10 @@ class ArticleSummarizer:
             A list of top n% sentences.
         """
 
-        n = int(percentage / 100 * len(self.sentences))
+        n = int(percentage / 100 * len(self.__sentences))
         top_n_sentences = [
-            sentence for sentence in self.sentences
-            if sentence in self.ranked_sentences[0:n]
+            sentence for sentence in self.__sentences
+            if sentence in self.__ranked_sentences[0:n]
         ]
 
         return top_n_sentences
