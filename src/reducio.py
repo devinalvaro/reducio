@@ -11,9 +11,9 @@ with open('data/article.txt', 'r') as file:
 summary = ArticleSummarizer(article, corpus_reader.document_number,
                             corpus_reader.document_frequency)
 
-summary_percentage = float(
-    input("To what percentage do you want to reducto the article? "))
-top_sentences = summary.get_top_sentences(100 - summary_percentage)
+
+sentence_number = int(input("Reducio text to how many sentences? "))
+top_sentences = summary.get_top_sentences(sentence_number)
 
 print()
 for top_sentence in top_sentences:

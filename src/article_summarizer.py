@@ -59,9 +59,6 @@ class ArticleSummarizer:
 
         self.__sentence_scores = sorted(
             self.__sentence_scores, key=itemgetter(0), reverse=True)
-        self.__ranked_sentences = [
-            sentence[1] for sentence in self.__sentence_scores
-        ]
 
     def __sentence_score(self, sentence):
         # return a sentence's average tf-idf score
@@ -80,8 +77,8 @@ class ArticleSummarizer:
     def __word_score(self, word):
         # return a word's tf-idf score
 
-        return tf(word, self.__word_frequency) * idf(word, self.__document_number,
-                                                     self.__document_frequency)
+        return tf(word, self.__word_frequency) * idf(
+            word, self.__document_number, self.__document_frequency)
 
     def __weigh_sentences_by_position(self):
         # weigh each sentence relative to its position.
@@ -115,20 +112,23 @@ class ArticleSummarizer:
 
             __sentence_score[0] *= weight
 
-    def get_top_sentences(self, percentage):
-        """Return top n% of the ranked sentences
+    def get_top_sentences(self, sentence_number=7):
+        """Return top sentences from the ranked sentences
 
         Args:
-            percentage: A float representing the percentage, e.g. 56.8.
+            sentence_number: Number of top sentences to be returned.
 
         Returns:
-            A list of top n% sentences.
+            A list of top sentences.
         """
 
-        n = int(percentage / 100 * len(self.__sentences))
+        ranked_sentences = [
+            sentence[1]
+            for sentence in self.__sentence_scores[0:sentence_number]
+        ]
         top_n_sentences = [
             sentence for sentence in self.__sentences
-            if sentence in self.__ranked_sentences[0:n]
+            if sentence in ranked_sentences
         ]
 
         return top_n_sentences
