@@ -8,9 +8,12 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 def tokenize_word(text, only_noun):
     """ Tokenize a text into words using NLTK
 
-    Filter punctuation (non-alphanumeric characters).
+    Filter punctuations (non-alphanumeric characters) except period.
+    Tokenize text into words.
+    Filter periods.
     Filter stop words.
     Filter non-noun words, if only_noun=true
+    Filter empty words.
 
     Args:
         text: Text to be tokenized into words.
@@ -21,10 +24,13 @@ def tokenize_word(text, only_noun):
 
     text = text.lower()
 
-    pattern = re.compile(r'[^a-zA-Z\s]')
+    pattern = re.compile(r'[^a-zA-Z.]+')
     text = pattern.sub(' ', text)
 
     word_tokens = word_tokenize(text)
+
+    pattern = re.compile(r'\.+')
+    word_tokens = [pattern.sub('', word) for word in word_tokens]
 
     stop_words = set(stopwords.words('english'))
     word_tokens = [word for word in word_tokens if word not in stop_words]
@@ -32,6 +38,8 @@ def tokenize_word(text, only_noun):
     if only_noun:
         word_tokens = pos_tag(word_tokens)
         word_tokens = [word for (word, tag) in word_tokens if 'NN' in tag]
+
+    word_tokens = [word for word in word_tokens if word]
 
     return word_tokens
 
