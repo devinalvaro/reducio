@@ -1,6 +1,7 @@
 import re
 
 from nltk.corpus import stopwords
+from nltk.stem import SnowballStemmer
 from nltk.tag import pos_tag
 from nltk.tokenize import sent_tokenize, word_tokenize
 
@@ -11,9 +12,9 @@ def tokenize_word(text, only_noun):
     Filter punctuations (non-alphanumeric characters) except period.
     Tokenize text into words.
     Filter periods.
-    Filter stop words.
+    Filter stop words and empty words.
+    Stem words.
     Filter non-noun words, if only_noun=true
-    Filter empty words.
 
     Args:
         text: Text to be tokenized into words.
@@ -33,13 +34,14 @@ def tokenize_word(text, only_noun):
     word_tokens = [pattern.sub('', word) for word in word_tokens]
 
     stop_words = set(stopwords.words('english'))
-    word_tokens = [word for word in word_tokens if word not in stop_words]
+    word_tokens = [word for word in word_tokens if word and word not in stop_words]
+
+    stemmer = SnowballStemmer('english')
+    word_tokens = [stemmer.stem(word) for word in word_tokens]
 
     if only_noun:
         word_tokens = pos_tag(word_tokens)
         word_tokens = [word for (word, tag) in word_tokens if 'NN' in tag]
-
-    word_tokens = [word for word in word_tokens if word]
 
     return word_tokens
 
