@@ -122,10 +122,10 @@ class ArticleSummarizer:
             A list of top sentences.
         """
 
-        ranked_sentences = [
+        ranked_sentences = set([
             sentence[1]
             for sentence in self.__sentence_scores[0:sentence_number]
-        ]
+        ])
         top_n_sentences = [
             sentence for sentence in self.__sentences
             if sentence in ranked_sentences
