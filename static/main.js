@@ -5,15 +5,11 @@ $(document).ready(function() {
             type: "POST",
             data: {
                 'text': text
+            },
+            success: function(data) {
+                $("#boxes").html(data);
             }
         });
-
-        var sentences = $.getJSON("../data/sentences.json");
-        for (var key in sentences) {
-            if (sentences.hasOwnProperty(key)) {
-                $("#boxes").append(sentences[key] + "<br />");
-            }
-        }
     };
 
     $("#sum-btn").click(function() {

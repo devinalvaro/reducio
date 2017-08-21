@@ -1,5 +1,3 @@
-from json import dump
-
 from src.article_summarizer import ArticleSummarizer
 from src.corpus_reader import CorpusReader
 
@@ -15,6 +13,8 @@ def reducio(sentence_number=5):
 
     top_sentences = summary.get_top_sentences(sentence_number)
 
-    top_sentences = dict(enumerate(top_sentences, 1))
-    with open('data/sentences.json', 'w') as jsonfile:
-        dump(top_sentences, jsonfile)
+    summarized_article = ''
+    for sentence in top_sentences:
+        summarized_article += (sentence + '<br />')
+
+    return summarized_article
