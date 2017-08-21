@@ -107,3 +107,6 @@ ENV/
 data/article.txt
 data/sentences.json
 data/*.csv
+
+# node modules
+node_modules
