@@ -1,0 +1,27 @@
+body {
+  background-color: #0288D1;
+
+  margin: 20px auto;
+
+  text-align: center;
+}
+
+h1 {
+  color: #FFF;
+
+  font-family: 'Ubuntu Mono';
+  font-size: 3.5em;
+
+  margin: 20px;
+}
+
+#text-box {
+  margin: 30px auto;
+
+  width: 400px;
+  height: 200px;
+}
+
+#search-btn {
+  width: 150px;
+}
