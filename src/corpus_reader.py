@@ -1,7 +1,7 @@
 from json import dump, load
 from pandas import read_csv
 
-from tokenizer import tokenize_word
+from src.tokenizer import tokenize_word
 
 
 class CorpusReader:

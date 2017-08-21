@@ -1,7 +1,7 @@
 from operator import itemgetter
 
-from tf_idf import term_frequency as tf, inverse_document_frequency as idf
-from tokenizer import tokenize_word, tokenize_sentence
+from src.tf_idf import term_frequency as tf, inverse_document_frequency as idf
+from src.tokenizer import tokenize_word, tokenize_sentence
 
 
 class ArticleSummarizer:
