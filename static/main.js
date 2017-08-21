@@ -1,7 +1,7 @@
 $(document).ready(function() {
     function summarize(text) {
         $.ajax({
-            url: "/test",
+            url: "/reducio",
             type: "POST",
             data: {
                 'text': text
