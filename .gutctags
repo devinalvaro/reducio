@@ -1,1 +1,2 @@
---exclude=data/*
+--exclude=data
+--exclude=node_modules
