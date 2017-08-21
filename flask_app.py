@@ -15,7 +15,7 @@ def test():
     with open('data/article.txt', 'w') as file:
         file.write(request.form.get('text'))
 
-    return reducio()
+    return reducio(int(request.form.get('number')))
 
 
 if __name__ == '__main__':

@@ -17,6 +17,12 @@ h1 {
     height: 200px;
 }
 
+#number-box {
+    margin: 30px auto;
+    width: 45px;
+    height: 35px;
+}
+
 #search-btn {
     width: 150px;
 }

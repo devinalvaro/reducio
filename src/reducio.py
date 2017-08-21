@@ -2,7 +2,7 @@ from src.article_summarizer import ArticleSummarizer
 from src.corpus_reader import CorpusReader
 
 
-def reducio(sentence_number=5):
+def reducio(sentence_number):
     corpus_reader = CorpusReader()
 
     with open('data/article.txt', 'r') as file:
