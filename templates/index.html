@@ -23,20 +23,38 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1>Reducio</h1>
+    <div id="main-body" class="container">
+        <div class="row">
+            <h1>Reducio</h1>
+        </div>
 
-        <textarea id="text-box" class="form-control" placeholder="Please put your news here."></textarea>
+        <div class="row">
+            <textarea id="text-box" class="form-control" placeholder="Please put your news here."></textarea>
+        </div>
 
-        <p>Summarize text into </p>
-        <textarea id="number-box" class="form-control" maxlength="2"></textarea>
-        <p> sentences</p>
+        <div class="row">
+            <div class="col-auto">
+                <p style="color:#fff">Summarize text into:</p>
+            </div>
+            <div class="col-2">
+                <textarea id="number-box" class="form-control input-sm" maxlength="2"></textarea>
+            </div>
+            <div class="col-auto">
+                <p style="color:#fff">sentences</p>
+            </div>
+        </div>
 
-        <button id="sum-btn" class="btn btn-success">
-                Summarize
-        </button>
+        <div class="row">
+            <div class="col-md center-block">
+                <button id="sum-btn" class="btn btn-success">
+                    <span class="pull-right">Summarize</span>
+                </button>
+            </div>
+        </div>
 
-        <div id="summarized-text-box"></div>
+        <div class="row">
+            <div id="summarized-text-box"></div>
+        </div>
     </div>
 </body>
 
