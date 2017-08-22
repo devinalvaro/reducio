@@ -24,13 +24,13 @@ class CorpusReader:
         """
 
         try:
-            with open('data/news.json', 'r') as jsonfile:
+            with open('reducio/data/news.json', 'r') as jsonfile:
                 cache = load(jsonfile)
 
                 self.document_number = cache[0]
                 self.document_frequency = cache[1]
         except IOError:
-            with open('data/news.json', 'w') as jsonfile:
+            with open('reducio/data/news.json', 'w') as jsonfile:
                 self.__open_corpus()
                 self.__count_document_frequency()
 
@@ -41,7 +41,7 @@ class CorpusReader:
     def __open_corpus(self):
         # open corpus dataset and store it in self.__articles
 
-        with open('data/news.csv') as csvfile:
+        with open('reducio/data/news.csv') as csvfile:
             reader = read_csv(csvfile)
             for entry in reader['body']:
                 self.__articles.append(str(entry))
