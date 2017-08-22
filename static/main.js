@@ -8,6 +8,7 @@ $(document).ready(function() {
                 'number': number
             },
             success: function(data) {
+                $("#summarized-text-box").css('background-color', '#66bb6a');
                 $("#summarized-text-box").html(data);
             }
         });

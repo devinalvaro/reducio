@@ -1,18 +1,21 @@
 body {
     margin: 20px auto;
 
-    background-color: #0288d1;
+    color: #fff;
+    background-color: #2196f3;
 
     text-align: center;
 }
 
-h1 {
-    margin: 10px auto;
-
-    color: #fff;
+#title {
+    margin: 5px auto;
 
     font-family: 'Ubuntu Mono';
     font-size: 3.5em;
+}
+
+#subtitle {
+    margin: 5px;
 }
 
 #main-body {
@@ -35,7 +38,11 @@ h1 {
 }
 
 #sum-btn {
-    margin: 20px;
+    margin: 10px auto 20px;
 
     cursor: pointer;
+}
+
+#summarized-text-box {
+    padding: 10px;
 }
