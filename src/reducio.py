@@ -15,6 +15,6 @@ def reducio(sentence_number):
 
     summarized_article = ''
     for sentence in top_sentences:
-        summarized_article += (sentence + '<br />')
+        summarized_article += ('<p>' + sentence + '</p>')
 
     return summarized_article
