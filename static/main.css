@@ -8,21 +8,21 @@ h1 {
     color: #fff;
     font-family: 'Ubuntu Mono';
     font-size: 3.5em;
-    margin: 20px;
+    margin: 20px auto;
 }
 
 #text-box {
-    margin: 30px auto;
+    margin: 20px auto;
     width: 400px;
     height: 200px;
 }
 
 #number-box {
-    margin: 30px auto;
-    width: 45px;
-    height: 35px;
+    margin: 20px auto;
+    width: 50px;
+    height: 40px;
 }
 
-#search-btn {
-    width: 150px;
+#sum-btn {
+    cursor: pointer;
 }

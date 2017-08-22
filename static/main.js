@@ -8,7 +8,7 @@ $(document).ready(function() {
                 'number': number
             },
             success: function(data) {
-                $("#boxes").html(data);
+                $("#summarized-text-box").html(data);
             }
         });
     };

@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <title>Reducio</title>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
     <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 
     <!-- JQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- JavaScript -->
     <script src="{{ url_for('static', filename='main.js') }}"></script>
@@ -29,15 +28,15 @@
 
         <textarea id="text-box" class="form-control" placeholder="Please put your news here."></textarea>
 
+        <p>Summarize text into </p>
         <textarea id="number-box" class="form-control" maxlength="2"></textarea>
+        <p> sentences</p>
 
-        <button id="sum-btn" type="submit" class="btn btn-success">
-            Summarize
+        <button id="sum-btn" class="btn btn-success">
+                Summarize
         </button>
 
-        <div id="boxes">
-            <p></p>
-        </div>
+        <div id="summarized-text-box"></div>
     </div>
 </body>
 
