@@ -104,7 +104,6 @@ ENV/
 *.p
 
 # data
-data/article.txt
 data/*.csv
 
 # node modules

@@ -2,11 +2,10 @@ from src.article_summarizer import ArticleSummarizer
 from src.corpus_reader import CorpusReader
 
 
-def reducio(sentence_number):
+def reducio(article, sentence_number):
     corpus_reader = CorpusReader()
 
-    with open('data/article.txt', 'r') as file:
-        article = file.read().replace('\n', ' ').replace('\r', '')
+    article = article.replace('\n', ' ').replace('\r', '')
 
     summary = ArticleSummarizer(article, corpus_reader.document_number,
                                 corpus_reader.document_frequency)

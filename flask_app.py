@@ -12,10 +12,10 @@ def index():
 
 @app.route('/reducio', methods=['POST'])
 def test():
-    with open('data/article.txt', 'w') as file:
-        file.write(request.form.get('text'))
+    article = str(request.form.get('text'))
+    number = int(request.form.get('number'))
 
-    return reducio(int(request.form.get('number')))
+    return reducio(article, number)
 
 
 if __name__ == '__main__':
