@@ -4,13 +4,14 @@ body {
     color: #fff;
     background-color: #2196f3;
 
+    font-family: 'Open Sans';
     text-align: center;
 }
 
 #title {
     margin: 5px auto;
 
-    font-family: 'Ubuntu Mono';
+    font-family: 'Ubuntu';
     font-size: 3.5em;
 }
 
