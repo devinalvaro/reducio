@@ -11,9 +11,6 @@ class CorpusReader:
     If fails, open corpus dataset and count the document frequency of each word.
     """
 
-    __articles = []
-    document_frequency = {}
-
     def __init__(self):
         """Inits CorpusReader
 
@@ -23,6 +20,8 @@ class CorpusReader:
         Count the document frequency of each word.
         """
 
+        self.document_frequency = {}
+
         try:
             with open('reducio/data/news.json', 'r') as jsonfile:
                 cache = load(jsonfile)
@@ -31,6 +30,8 @@ class CorpusReader:
                 self.document_frequency = cache[1]
         except IOError:
             with open('reducio/data/news.json', 'w') as jsonfile:
+                self.__articles = []
+
                 self.__open_corpus()
                 self.__count_document_frequency()
 

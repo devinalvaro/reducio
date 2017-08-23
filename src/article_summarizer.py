@@ -10,9 +10,6 @@ class ArticleSummarizer:
     Rank sentences in the article with tf-idf scoring algorithm.
     """
 
-    __sentence_scores = []
-    __word_frequency = {}
-
     def __init__(self, article, document_number, document_frequency):
         """ Inits ArticleSummarizer
 
@@ -33,6 +30,7 @@ class ArticleSummarizer:
         self.__document_number = document_number + 1
         self.__document_frequency = document_frequency
 
+        self.__word_frequency = {}
         word_set = set()
 
         for sentence in self.__sentences:
@@ -50,6 +48,8 @@ class ArticleSummarizer:
                 self.__document_frequency[word] = 1
             else:
                 self.__document_frequency[word] += 1
+
+        self.__sentence_scores = []
 
         for sentence in self.__sentences:
             self.__sentence_scores.append(
@@ -112,7 +112,7 @@ class ArticleSummarizer:
 
             __sentence_score[0] *= weight
 
-    def get_top_sentences(self, sentence_number=7):
+    def get_top_sentences(self, sentence_number):
         """Return top sentences from the ranked sentences
 
         Args:
