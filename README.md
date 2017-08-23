@@ -29,7 +29,7 @@ Simply visit <http://www.reducio.xyz>.
 
 - Languages: Python 3, JavaScript, HTML, CSS
 - Libraries: [NLTK](http://www.nltk.org), [Pandas](http://pandas.pydata.org), [jQuery](https://jquery.com)
-- Web Framework: [Flask](http://flask.pocoo.org), [Bootstrap](http://getbootstrap.com)
+- Web Frameworks: [Flask](http://flask.pocoo.org), [Bootstrap](http://getbootstrap.com)
 
 ### License
 
