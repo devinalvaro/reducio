@@ -24,14 +24,14 @@ body {
 }
 
 #text-box {
-    margin: 20px auto;
+    margin: 20px 10px;
     width: 400px;
     height: 200px;
 }
 
 #number-box {
     padding: 5px;
-    width: 30px;
+    width: 32px;
     height: 30px;
 
     resize: none;
@@ -45,6 +45,7 @@ body {
 }
 
 #summarized-text-box {
+    margin: auto 10px;
     padding: 10px;
 }
 
