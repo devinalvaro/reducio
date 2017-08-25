@@ -2,11 +2,10 @@ import re
 
 from nltk.corpus import stopwords
 from nltk.stem import SnowballStemmer
-from nltk.tag import pos_tag
 from nltk.tokenize import sent_tokenize, word_tokenize
 
 
-def tokenize_word(text, only_noun):
+def tokenize_word(text):
     """ Tokenize a text into words using NLTK
 
     Filter punctuations (non-alphanumeric characters) except period.
@@ -38,10 +37,6 @@ def tokenize_word(text, only_noun):
 
     stemmer = SnowballStemmer('english')
     word_tokens = [stemmer.stem(word) for word in word_tokens]
-
-    if only_noun:
-        word_tokens = pos_tag(word_tokens)
-        word_tokens = [word for (word, tag) in word_tokens if 'NN' in tag]
 
     return word_tokens
 

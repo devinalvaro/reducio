@@ -51,7 +51,7 @@ class CorpusReader:
         # count the document frequency of each word
 
         for article in self.__articles:
-            words = set(tokenize_word(article, only_noun=False))
+            words = set(tokenize_word(article))
             for word in words:
                 if word not in self.document_frequency:
                     self.document_frequency[word] = 1

@@ -34,7 +34,7 @@ class ArticleSummarizer:
         word_set = set()
 
         for sentence in self.__sentences:
-            words = tokenize_word(sentence, only_noun=True)
+            words = tokenize_word(sentence)
             for word in words:
                 if word not in self.__word_frequency:
                     self.__word_frequency[word] = 1
@@ -63,7 +63,7 @@ class ArticleSummarizer:
     def __sentence_score(self, sentence):
         # return a sentence's average tf-idf score
 
-        words = tokenize_word(sentence, only_noun=True)
+        words = tokenize_word(sentence)
 
         if not words:
             return 0
