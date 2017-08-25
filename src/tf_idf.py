@@ -1,4 +1,4 @@
-from math import log10
+from math import log
 
 
 def term_frequency(word, word_frequency):
@@ -11,7 +11,7 @@ def term_frequency(word, word_frequency):
         A float representing the word's tf value.
     """
 
-    return 0 if word_frequency[word] == 0 else 1 + log10(word_frequency[word])
+    return 0 if word_frequency[word] == 0 else 1 + log(word_frequency[word])
 
 
 def inverse_document_frequency(word, document_number, document_frequency):
@@ -26,4 +26,4 @@ def inverse_document_frequency(word, document_number, document_frequency):
         A float repesenting the word's idf value.
     """
 
-    return log10(document_number / document_frequency[word])
+    return log(document_number / document_frequency[word])
