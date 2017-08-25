@@ -20,12 +20,11 @@ body {
 }
 
 #main-body {
-    width: 400px;
+    max-width: 400px;
 }
 
 #text-box {
     margin: 20px 10px;
-    width: 400px;
     height: 200px;
 }
 
@@ -39,7 +38,7 @@ body {
 }
 
 #sum-btn {
-    margin: 10px auto 20px;
+    margin: 20px auto;
 
     cursor: pointer;
 }
