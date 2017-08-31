@@ -25,11 +25,21 @@ Idf works better the more texts there are in the dataset. Because of this, Reduc
 
 Simply visit <http://www.reducio.xyz>.
 
+### Documentation
+
+To generate the project's documentation:
+
+1. Run `make` from the project's root directory.
+2. Run `make html` from `doc` directory.
+
+Open the documentation with browser at `doc/build/html/index.html`.
+
 ### Built with
 
 - Languages: Python 3, JavaScript, HTML, CSS
 - Libraries: [NLTK](http://www.nltk.org), [Pandas](http://pandas.pydata.org), [jQuery](https://jquery.com)
 - Web Frameworks: [Flask](http://flask.pocoo.org), [Bootstrap](http://getbootstrap.com)
+- Documentation: [Sphinx](http://www.sphinx-doc.org)
 
 ### License
 
