@@ -29,7 +29,7 @@ Simply visit <https://reducio.herokuapp.com>.
 
 To generate the project's documentation:
 
-1. Run `make` from the project's root directory.
+1. Run `pip install sphinx`
 2. Run `make html` from `doc` directory.
 
 Open the documentation with browser at `doc/build/html/index.html`.
