@@ -23,13 +23,13 @@ class CorpusReader:
         self.document_frequency = {}
 
         try:
-            with open('reducio/data/news.json', 'r') as jsonfile:
+            with open('data/news.json', 'r') as jsonfile:
                 cache = load(jsonfile)
 
                 self.document_number = cache[0]
                 self.document_frequency = cache[1]
         except IOError:
-            with open('reducio/data/news.json', 'w') as jsonfile:
+            with open('data/news.json', 'w') as jsonfile:
                 self.__articles = []
 
                 self.__open_corpus()
