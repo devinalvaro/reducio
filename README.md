@@ -1,6 +1,6 @@
 # Reducio
 
-Reducio is a program that summarizes text with [tf-idf](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) (term frequency - inverse document frequency) weighting scheme. See it in action at <http://www.reducio.xyz>.
+Reducio is a program that summarizes text with [tf-idf](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) (term frequency - inverse document frequency) weighting scheme. See it in action at <https://reducio.herokuapp.com>.
 
 This project was initially started as an assignment from Artificial Intelligence and Graphics Laboratory, Institut Teknologi Bandung.
 
@@ -23,7 +23,7 @@ Idf works better the more texts there are in the dataset. Because of this, Reduc
 
 ### Usage
 
-Simply visit <http://www.reducio.xyz>.
+Simply visit <https://reducio.herokuapp.com>.
 
 ### Documentation
 
