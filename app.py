@@ -11,7 +11,7 @@ def index():
 
 
 @app.route('/reducio', methods=['POST'])
-def test():
+def summarize():
     article = str(request.form.get('text'))
     number = int(request.form.get('number'))
 
